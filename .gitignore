@@ -1,0 +1,3 @@
+*.egg-info
+__pycache__
+backend_examples/lazy_example_py/*.json
