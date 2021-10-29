@@ -11,7 +11,7 @@ The said executable files are expected to have the following behavior
 
 #### `list_all`
 
-Lists all unique device IDs recognized by the back end, the IDs are back end specific, the front end does not care about the specifics
+Lists all unique device IDs recognized by the back end, the IDs are back end specific, if no devices are found it should return `-ENODEV`
 
 Example:
 ```bash
@@ -27,7 +27,7 @@ $
 
 #### `get_info`
 
-Returns device specific info (e.g. format, resolution, fps, etc.), further details will be provided later
+Returns device and back end specific info in form of json, further details will be provided later
 
 #### `setup`
 
