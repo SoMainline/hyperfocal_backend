@@ -27,7 +27,28 @@ $
 
 #### `get_info`
 
-Returns device and back end specific info in form of json, further details will be provided later
+This one does double dutty, if no arguments are supplied it should to print a json string of back end info to std out, if an argument is supplied it should assume it's a device specific index and it needs to print a json string with that device's settings to std out, if any errors are encountered it should return the appropriate POSIX error
+```bash
+$ ./get_info
+{
+    "name": "lazy-back-end-example",
+    "version": "0.1",
+    "description": "A lazy back end example, long description, blah blah blah blah blah blah blah, etc.",
+    "author": "Oleg Vorobiov <oleg.vorobiov@somainline.org>",
+    "maintainer": "Oleg Vorobiov <oleg.vorobiov@somainline.org>"
+}
+$ echo $?
+0 # success
+$ ./get_info 0 # '0' - back end specific ID
+{"rotate": 0, "flipX": false, "flipY": false, "scale": 1.0}
+$ echo $?
+0 # success
+$ ./get_info 5 # '5' - index out of bounds according to list_all
+$
+$ echo $?
+56 # EBADRQC - this backend returns EBADRQC on bad IDs
+$
+```
 
 #### `setup`
 
