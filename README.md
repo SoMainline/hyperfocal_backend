@@ -1,19 +1,37 @@
 # Hyperfocal back end
+
+Hyperfocal use this back end API to abstract away from handling camera devices, not the best API in the world, but it works.
+
 ## Expected behavior
-The back end is expected to have the following executable files exposed to the front end
+Hyperfocal back ends are comprised of 4 executable files:
 ```
-$ ls backend_example
-cleanup  get_info  list_all  setup
+list_all
+get_info
+setup
+cleanup
+```
+These files need to be in a single directory, that directory will be considered as the back end and it's location. E.g.
+```bash
+$ tree example
+example/
+├── cleanup
+├── get_info
+├── list_all
+└── setup
+
+0 directories, 4 files
 ```
 
-The said executable files are expected to have the following behavior
+Then to use this back end in any Hyperfocal front end you need to set `"backend_dir"` to the full path of this back end directory in Hyperfocal's config (but you can also do that from Hyperfocal's settings)
 
+---
+
+Following sections explain expected behavior from the back end members
 
 #### `list_all`
 
-Lists all unique device IDs recognized by the back end, the IDs are back end specific, if no devices are found it should return `-ENODEV`
+Lists all unique device IDs recognized by the back end, the IDs are back end specific, if no devices are found it should set the return code to `-ENODEV` (if any other error occurs, set the return code accordingly)
 
-Example:
 ```bash
 $ ./list_all
 0
